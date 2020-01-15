@@ -2,6 +2,7 @@ import React from "react";
 import getSeason from "../../util/getSeason";
 
 const Rank = ({ seasonNumber, mmr, rank, isMax }) => {
+  const ranks = require.context("../../../public/images/rank");
   const seasonName = getSeason(seasonNumber);
   return (
     <div>
@@ -10,7 +11,7 @@ const Rank = ({ seasonNumber, mmr, rank, isMax }) => {
         alt="Rank"
         className="userRank"
         id="rank"
-        src={`${process.env.PUBLIC_URL}/images/rank/${rank}.png`}
+        src={ranks(`./${rank}.png`)}
         width="146"
         height="146"
       />
