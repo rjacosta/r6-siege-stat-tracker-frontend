@@ -9,12 +9,12 @@ const FavOperator = ({ opName }) => {
     "../../../public/images/operators/operatorPics"
   );
   const opType = getOperatorType(opName);
-
+  const opNameLowerCase = opName.toLowerCase();
   return (
     <div
       className="opTile"
       style={{
-        backgroundImage: `url(${opIcons(`./${opName}.png`)})`,
+        backgroundImage: `url(${opIcons(`./${opNameLowerCase}.png`)})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "320px 320px"
       }}
@@ -26,7 +26,7 @@ const FavOperator = ({ opName }) => {
       <img
         alt="operator"
         className={opType}
-        src={opPics(`./${opName}.png`)}
+        src={opPics(`./${opNameLowerCase}.png`)}
         width="320"
         height="600"
       />
