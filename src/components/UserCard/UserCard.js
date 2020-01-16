@@ -1,10 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import roundToPrecision from "../../util/roundToPrecision"
 import getOperator from "../../util/getOperator";
 import FavOperator from "./FavOperator";
 import Rank from "./Rank";
 
-const UserCard = ({ userData }) => {
+const UserCard = ({ userData, comparing }) => {
   const CURRENT_SEASON = 16;
 
   const history = useHistory();
@@ -32,11 +33,6 @@ const UserCard = ({ userData }) => {
   const userFavAttacker = getOperator(userData.favattacker);
   const userFavDefender = getOperator(userData.favdefender);
 
-  const roundToPrecision = (x, precision) => {
-    var y = x + (precision === undefined ? 0.5 : precision / 2);
-    return y - (y % (precision === undefined ? 1 : precision));
-  };
-
   const userKd = roundToPrecision(NA_kills / NA_deaths, 0.005);
   const userWl = roundToPrecision(NA_wins / NA_losses, 0.005);
 
@@ -61,8 +57,8 @@ const UserCard = ({ userData }) => {
   ));
 
   return (
-    <div className="userCard">
-      <FavOperator opName={userFavAttacker} />
+    <div className={comparing ? "userCardCompare" : "userCard"}>
+      {comparing ? null : <FavOperator opName={userFavAttacker} />}
       <div className="userNameAvatarRankContainer">
         <h2>{username}</h2>
         <h5>Previous usernames: {aliasesList}</h5>
@@ -90,7 +86,7 @@ const UserCard = ({ userData }) => {
         <h3>{"Previous Ranks"}</h3>
         <div className="avatarAndRankGridContainer">{prevSeasonRankings}</div>
       </div>
-      <FavOperator opName={userFavDefender} />
+      {comparing ? null : <FavOperator opName={userFavDefender} />}
     </div>
   );
 };

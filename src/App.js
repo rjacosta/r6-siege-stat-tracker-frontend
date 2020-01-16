@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
 import UserCard from "./components/UserCard/UserCard";
+import UserCardCompare from "./components/UserCardCompare";
 import { Switch, Route, useHistory } from "react-router-dom";
 
 const App = () => {
@@ -8,64 +9,117 @@ const App = () => {
   const NAME_URL = "https://r6tab.com/api/search.php?platform=uplay&search=";
   const USER_DATA_URL = "https://r6tab.com/api/player.php?p_id=";
   const [username, setUsername] = useState("");
+  const [usernameCompare, setUsernameCompare] = useState("");
   const [userData, setUserData] = useState({});
+  const [userCompareData, setUserCompareData] = useState({});
   const [loading, setLoading] = useState(false);
 
   const onUsernameInput = event => {
-    setUsername(event.target.value);
+    event.target.id === "username"
+      ? setUsername(event.target.value)
+      : setUsernameCompare(event.target.value);
+  };
+
+  const compareUsers = event => {
+    event.preventDefault();
+    setUserData({});
+    setUserCompareData({});
+    setLoading(true);
+    Promise.all([getUserData(username), getUserData(usernameCompare)]).then(
+      ([userData, userCompareData]) => {
+        if (userData !== false && userCompareData !== false) {
+          setUserData(userData);
+          setUserCompareData(userCompareData);
+          history.push(
+            "/compareUsers/username=" +
+              username +
+              "&usernameCompare=" +
+              usernameCompare
+          );
+        } else {
+          history.push("/");
+        }
+        setLoading(false);
+      }
+    );
   };
 
   const searchUsername = event => {
     event.preventDefault();
     setUserData({});
     setLoading(true);
-    fetch(NAME_URL + username)
-      .then(response => response.json())
-      .then(data => {
-        if (data.totalresults > 0) {
-          const basicUserData = data.results.find(
-            user => user.p_name === username
-          );
-          if (basicUserData === undefined) {
-            setLoading(false);
-            return;
-          }
-          const { p_id } = basicUserData;
-          fetch(USER_DATA_URL + p_id)
-            .then(response => response.json())
-            .then(data => {
-              if (data.playerfound) {
-                setUserData(data);
-                history.push("/userCard/" + username);
-              } else {
-                history.push("/");
-              }
+    getUserData(username, setUserData).then(userData => {
+      setUserData(userData);
+      if (userData !== false) {
+        setUserData(userData);
+        history.push("/user/" + username);
+      } else {
+        history.push("/");
+      }
+      setLoading(false);
+    });
+  };
+
+  const getUserData = username => {
+    return new Promise((resolve, reject) => {
+      fetch(NAME_URL + username)
+        .then(response => response.json())
+        .then(data => {
+          if (data.totalresults > 0) {
+            const basicUserData = data.results.find(
+              user => user.p_name === username
+            );
+            if (basicUserData === undefined) {
               setLoading(false);
-            });
-        }
-      });
+              return;
+            }
+            const { p_id } = basicUserData;
+            fetch(USER_DATA_URL + p_id)
+              .then(response => response.json())
+              .then(data => {
+                data.playerfound ? resolve(data) : reject(false);
+              });
+          }
+        });
+    });
   };
 
   return (
     <div className="app">
       <Header />
-      <form onSubmit={searchUsername}>
+      <form>
         <label className="formLabel">Username: </label>
         <input
+          id="username"
           className="formLabel"
           onChange={onUsernameInput}
           type="text"
           value={username}
         />
-        <button className="formLabel" type="submit">
+        <button onClick={searchUsername} className="formLabel" type="submit">
           search
+        </button>{" "}
+        <label className="formLabel">Compare With: </label>
+        <input
+          id="usernameCompare"
+          className="formLabel"
+          onChange={onUsernameInput}
+          type="text"
+          value={usernameCompare}
+        />
+        <button onClick={compareUsers} className="formLabel" type="submit">
+          compare
         </button>
       </form>
+
       {loading ? <div className="loader"></div> : null}
       {!loading && (
         <Switch>
-          <Route path="/userCard">
+          <Route path="/user">
             <UserCard userData={userData} />
+          </Route>
+          <Route path="/compareUsers">
+            <UserCardCompare userData={userData} userCompareData={userCompareData} />
           </Route>
         </Switch>
       )}
