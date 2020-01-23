@@ -49,9 +49,9 @@ const App = () => {
     event.preventDefault();
     setUserData({});
     setLoading(true);
-    getUserData(username, setUserData).then(userData => {
+    getUserData(username).then(userData => {
       setUserData(userData);
-      if (userData !== false) {
+      if (userData !== null) {
         setUserData(userData);
         history.push("/user/" + username);
       } else {
@@ -61,29 +61,6 @@ const App = () => {
     });
   };
 
-  /*const getUserData = username => {
-    return new Promise((resolve, reject) => {
-      fetch(NAME_URL + username)
-        .then(response => response.json())
-        .then(data => {
-          if (data.totalresults > 0) {
-            const basicUserData = data.results.find(
-              user => user.p_name === username
-            );
-            if (basicUserData === undefined) {
-              setLoading(false);
-              return;
-            }
-            const { p_id } = basicUserData;
-            fetch(USER_DATA_URL + p_id)
-              .then(response => response.json())
-              .then(data => {
-                data.playerfound ? resolve(data) : reject(false);
-              });
-          }
-        });
-    });
-  };*/
   const getUserData = username => {
     return new Promise((resolve, reject) => {
       fetch("http://localhost:8080/userData?username=" + username)
@@ -91,12 +68,12 @@ const App = () => {
         .then(data => {
           if (data.hasData) {
             setLoading(false);
-            return data;
+            resolve(data);
           } else {
-            return null;
+            resolve(null);
           }
         })
-        .catch(() => null);
+        .catch(() => resolve(null));
     });
   };
 

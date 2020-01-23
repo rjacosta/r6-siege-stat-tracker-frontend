@@ -7,9 +7,8 @@ import Rank from "./Rank";
 
 const UserCard = ({ userData, comparing }) => {
   const CURRENT_SEASON = 16;
-
   const history = useHistory();
-  if (Object.keys(userData).length === 0) {
+  if (!userData.hasData) {
     history.goBack();
     return null;
   }
@@ -17,24 +16,21 @@ const UserCard = ({ userData, comparing }) => {
   const AVATAR_URL =
     "https://ubisoft-avatars.akamaized.net/p_user/default_146_146.png";
   const {
-    NA_mmr,
-    NA_maxmmr,
-    NA_rank,
-    NA_maxrank,
-    NA_kills,
-    NA_deaths,
-    NA_wins,
-    NA_losses
-  } = userData.ranked;
+    mmr,
+    maxMmr,
+    rank,
+    maxRank,
+    kills,
+    deaths,
+    wins,
+    losses
+  } = userData.rankedData;
 
-  const username = userData.p_name;
-  const pUser = userData.p_user;
-  const userLevel = userData.p_level;
   const userFavAttacker = getOperator(userData.favattacker);
   const userFavDefender = getOperator(userData.favdefender);
 
-  const userKd = roundToPrecision(NA_kills / NA_deaths, 0.005);
-  const userWl = roundToPrecision(NA_wins / NA_losses, 0.005);
+  const userKd = roundToPrecision(kills / deaths, 0.005);
+  const userWl = roundToPrecision(wins / losses, 0.005);
 
   var aliasesList = Object.keys(userData.aliases)
     .map(key => userData.aliases[key])
@@ -60,28 +56,28 @@ const UserCard = ({ userData, comparing }) => {
     <div className={comparing ? "userCardCompare" : "userCard"}>
       {comparing ? null : <FavOperator opName={userFavAttacker} />}
       <div className="userNameAvatarRankContainer">
-        <h2>{username}</h2>
+        <h2>{userData.name}</h2>
         <h5>Previous usernames: {aliasesList}</h5>
         <div className="avatarAndRankGridContainer">
           <div>
             <img
               alt="Avatar"
-              src={AVATAR_URL.replace("p_user", pUser)}
+              src={AVATAR_URL.replace("p_user", userData.id)}
               width="169"
               height="169"
             />
-            <span className="imgCaption">Level: {userLevel}</span>
+            <span className="imgCaption">Level: {userData.level}</span>
           </div>
-          <Rank seasonNumber={CURRENT_SEASON} mmr={NA_mmr} rank={NA_rank} />
-          <Rank mmr={NA_maxmmr} rank={NA_maxrank} isMax={true} />
+          <Rank seasonNumber={CURRENT_SEASON} mmr={mmr} rank={rank} />
+          <Rank mmr={maxMmr} rank={maxRank} isMax={true} />
         </div>
         <div className="userCardDataGridContainer">
           <div className="userCardGridDataItem">W/L: {userWl}</div>
-          <div className="userCardGridDataItem">Wins: {NA_wins}</div>
-          <div className="userCardGridDataItem">Losses: {NA_losses}</div>
+          <div className="userCardGridDataItem">Wins: {wins}</div>
+          <div className="userCardGridDataItem">Losses: {losses}</div>
           <div className="userCardGridDataItem">K/D: {userKd}</div>
-          <div className="userCardGridDataItem">Kills: {NA_kills}</div>
-          <div className="userCardGridDataItem">Deaths: {NA_deaths}</div>
+          <div className="userCardGridDataItem">Kills: {kills}</div>
+          <div className="userCardGridDataItem">Deaths: {deaths}</div>
         </div>
         <h3>{"Previous Ranks"}</h3>
         <div className="avatarAndRankGridContainer">{prevSeasonRankings}</div>
