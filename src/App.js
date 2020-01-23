@@ -91,8 +91,12 @@ const App = () => {
         .then(data => {
           if (data.hasData) {
             setLoading(false);
+            return data;
+          } else {
+            return null;
           }
-        });
+        })
+        .catch(() => null);
     });
   };
 
