@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import UserCard from "./components/UserCard/UserCard";
 import UserCardCompare from "./components/UserCardCompare";
 import { Switch, Route, useHistory } from "react-router-dom";
+import axios from 'axios'
 
 const App = () => {
   const history = useHistory();
@@ -60,7 +61,7 @@ const App = () => {
     });
   };
 
-  const getUserData = username => {
+  /*const getUserData = username => {
     return new Promise((resolve, reject) => {
       fetch(NAME_URL + username)
         .then(response => response.json())
@@ -79,6 +80,17 @@ const App = () => {
               .then(data => {
                 data.playerfound ? resolve(data) : reject(false);
               });
+          }
+        });
+    });
+  };*/
+  const getUserData = username => {
+    return new Promise((resolve, reject) => {
+      fetch("http://localhost:8080/userData?username=" + username)
+        .then(response => response.json())
+        .then(data => {
+          if (data.hasData) {
+            setLoading(false);
           }
         });
     });
