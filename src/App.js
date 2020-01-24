@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
+import TextBubble from "./components/TextBubble";
 import UserCard from "./components/UserCard/UserCard";
 import UserCardCompare from "./components/UserCardCompare";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
-import axios from 'axios'
 
 const App = () => {
   const history = useHistory();
@@ -77,44 +76,57 @@ const App = () => {
 
   return (
     <div className="app">
-      <Link style={{textDecoration: "none"}} to="/"><Header /></Link>
-      <form>
-        <label className="formLabel">Username: </label>
-        <input
-          id="username"
-          className="formLabel"
-          onChange={onUsernameInput}
-          type="text"
-          value={username}
-        />
-        <button onClick={searchUsername} className="formLabel" type="submit">
-          search
-        </button>{" "}
-        <label className="formLabel">Compare With: </label>
-        <input
-          id="usernameCompare"
-          className="formLabel"
-          onChange={onUsernameInput}
-          type="text"
-          value={usernameCompare}
-        />
-        <button onClick={compareUsers} className="formLabel" type="submit">
-          compare
-        </button>
-      </form>
+      <Link style={{ textDecoration: "none" }} to="/">
+        <TextBubble text="Rainbow 6 Siege Stat Tracker" type={1} />
+      </Link>
+
+      <TextBubble
+        type={"span"}
+        text={
+          <form>
+            <label>Username: </label>
+            <input
+              id="username"
+              onChange={onUsernameInput}
+              type="text"
+              value={username}
+            />
+            <button onClick={searchUsername} type="submit">
+              search
+            </button>{" "}
+            <label>Compare With: </label>
+            <input
+              id="usernameCompare"
+              onChange={onUsernameInput}
+              type="text"
+              value={usernameCompare}
+            />
+            <button onClick={compareUsers} type="submit">
+              compare
+            </button>
+          </form>
+        }
+      ></TextBubble>
 
       {loading ? <div className="loader"></div> : null}
       {!loading && (
         <Switch>
           <Route exact path="/">
-            <h4 className="whiteText">Welcome to Rainbow 6 Siege Stat Tracker! Enter in a username above to find the stats of that user. 
-            You can also compare stats between users using the compare with option.</h4>
+            <TextBubble
+              text="Welcome to Rainbow 6 Siege Stat Tracker! Enter in a username
+                above to find the stats of that user. You can also compare stats
+                between users using the compare with option."
+              type={3}
+            />
           </Route>
           <Route path="/user">
             <UserCard userData={userData} />
           </Route>
           <Route path="/compareUsers">
-            <UserCardCompare userData={userData} userCompareData={userCompareData} />
+            <UserCardCompare
+              userData={userData}
+              userCompareData={userCompareData}
+            />
           </Route>
         </Switch>
       )}

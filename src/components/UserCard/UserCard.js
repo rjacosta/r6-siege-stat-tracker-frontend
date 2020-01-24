@@ -50,8 +50,8 @@ const UserCard = ({ userData, comparing }) => {
     <div className={comparing ? "userCardCompare" : "userCard"}>
       {comparing ? null : <FavOperator opName={userData.favAttacker} opType="Attacker" />}
       <div className="userNameAvatarRankContainer">
-        <h2>{userData.name}</h2>
-        <h5>Previous usernames: {aliasesList}</h5>
+        <h2 className="imgCaption">{userData.name}</h2>
+        <h4 className="imgCaption">{`Previous usernames:  ${aliasesList}`}</h4>
         <div className="avatarAndRankGridContainer">
           <div>
             <img
@@ -73,7 +73,7 @@ const UserCard = ({ userData, comparing }) => {
           <div className="userCardGridDataItem">Kills: {kills}</div>
           <div className="userCardGridDataItem">Deaths: {deaths}</div>
         </div>
-        <h3>{"Previous Ranks"}</h3>
+        <h3 className="imgCaption">{"Previous Ranks"}</h3>
         <div className="avatarAndRankGridContainer">{prevSeasonRankings}</div>
       </div>
       {comparing ? null : <FavOperator opName={userData.favDefender} opType="Defender" />}
