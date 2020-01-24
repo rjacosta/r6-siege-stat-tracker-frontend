@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import UserCard from "./components/UserCard/UserCard";
 import UserCardCompare from "./components/UserCardCompare";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, Link } from "react-router-dom";
 import axios from 'axios'
 
 const App = () => {
   const history = useHistory();
-  const NAME_URL = "https://r6tab.com/api/search.php?platform=uplay&search=";
-  const USER_DATA_URL = "https://r6tab.com/api/player.php?p_id=";
   const [username, setUsername] = useState("");
   const [usernameCompare, setUsernameCompare] = useState("");
   const [userData, setUserData] = useState({});
@@ -28,7 +26,7 @@ const App = () => {
     setLoading(true);
     Promise.all([getUserData(username), getUserData(usernameCompare)]).then(
       ([userData, userCompareData]) => {
-        if (userData !== false && userCompareData !== false) {
+        if (userData.hasData && userCompareData.hasData) {
           setUserData(userData);
           setUserCompareData(userCompareData);
           history.push(
@@ -79,7 +77,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header />
+      <Link style={{textDecoration: "none"}} to="/"><Header /></Link>
       <form>
         <label className="formLabel">Username: </label>
         <input
@@ -108,6 +106,10 @@ const App = () => {
       {loading ? <div className="loader"></div> : null}
       {!loading && (
         <Switch>
+          <Route exact path="/">
+            <h4 className="whiteText">Welcome to Rainbow 6 Siege Stat Tracker! Enter in a username above to find the stats of that user. 
+            You can also compare stats between users using the compare with option.</h4>
+          </Route>
           <Route path="/user">
             <UserCard userData={userData} />
           </Route>

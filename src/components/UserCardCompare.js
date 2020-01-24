@@ -1,67 +1,57 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import UserCard from "./UserCard/UserCard";
-import roundToPrecision from "../util/roundToPrecision";
+import roundToPrecision from "../util/roundToPrecision"
 
 const UserCardCompare = ({ userData, userCompareData }) => {
   const history = useHistory();
   if (
-    Object.keys(userData).length === 0 ||
-    Object.keys(userCompareData).length === 0
+    !userData.hasData || !userCompareData.hasData
   ) {
     history.goBack();
     return null;
   }
 
   const {
-    NA_mmr: userMMR,
-    NA_maxmmr: userMaxMMR,
-    NA_rank: userRank,
-    NA_maxrank: userMaxRank,
-    NA_kills: userKills,
-    NA_deaths: userDeaths,
-    NA_wins: userWins,
-    NA_losses: userLosses
-  } = userData.ranked;
+    mmr: userMMR,
+    rank: userRank,
+    kills: userKills,
+    deaths: userDeaths,
+    kd: userKd,
+    wins: userWins,
+    losses: userLosses,
+    wl: userWl
+  } = userData.rankedData;
 
   const {
-    NA_mmr: userCompareMMR,
-    NA_maxmmr: userCompareMaxMMR,
-    NA_rank: userCompareRank,
-    NA_maxrank: userCompareMaxRank,
-    NA_kills: userCompareKills,
-    NA_deaths: userCompareDeaths,
-    NA_wins: userCompareWins,
-    NA_losses: userCompareLosses
-  } = userCompareData.ranked;
+    mmr: userCompareMMR,
+    rank: userCompareRank,
+    kills: userCompareKills,
+    deaths: userCompareDeaths,
+    kd: userCompareKd,
+    wins: userCompareWins,
+    losses: userCompareLosses,
+    wl: userCompareWl
+  } = userCompareData.rankedData;
 
-  const userKd = roundToPrecision(userKills / userDeaths, 0.005);
-  const userWl = roundToPrecision(userWins / userLosses, 0.005);
-  const userCompareKd = roundToPrecision(
-    userCompareKills / userCompareDeaths,
-    0.005
-  );
-  const userCompareWl = roundToPrecision(
-    userCompareWins / userCompareLosses,
-    0.005
-  );
-
+  const mmrDiff = userMMR - userCompareMMR;
   const rankDiff = userRank - userCompareRank;
-  const wlDiff = userWl - userCompareWl;
+  const wlDiff = roundToPrecision(userWl - userCompareWl, 2);
   const winsDiff = userWins - userCompareWins;
   const lossesDiff = userLosses - userCompareLosses;
-  const kdDiff = userKd - userCompareKd;
+  const kdDiff = roundToPrecision(userKd - userCompareKd, 2);
   const killsDiff = userKills - userCompareKills;
   const deathsDiff = userDeaths - userCompareDeaths;
 
   const compositeScore = 
-    rankDiff > 0 ? 1 : rankDiff < 0 ? -1 : 0 
-    + wlDiff > 0 ? 1 : wlDiff < 0 ? -1 : 0 
-    + winsDiff > 0 ? 1 : winsDiff < 0 ? -1 : 0 
-    + lossesDiff > 0 ? 1 : lossesDiff < 0 ? -1 : 0 
-    + kdDiff > 0 ? 1 : kdDiff < 0 ? -1 : 0 
-    + killsDiff > 0 ? 1 : killsDiff < 0 ? -1 : 0 
-    + deathsDiff > 0 ? 1 : deathsDiff < 0 ? -1 : 0;
+    (mmrDiff > 0 ? 1 : (mmrDiff < 0 ? -1 : 0))
+    + (rankDiff > 0 ? 1 : (rankDiff < 0 ? -1 : 0))
+    + (wlDiff > 0 ? 1 : (wlDiff < 0 ? -1 : 0))
+    + (winsDiff > 0 ? 1 : (winsDiff < 0 ? -1 : 0)) 
+    + (lossesDiff > 0 ? 1 : (lossesDiff < 0 ? -1 : 0)) 
+    + (kdDiff > 0 ? 1 : (kdDiff < 0 ? -1 : 0)) 
+    + (killsDiff > 0 ? 1 : (killsDiff < 0 ? -1 : 0)) 
+    + (deathsDiff > 0 ? -1 : (deathsDiff < 0 ? 1 : 0));
 
   return (
     <div className="userCardCompareGrid">
@@ -76,7 +66,18 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               : "userDataGray"
           }
         >
-          Rank {rankDiff}
+          rank {rankDiff}
+        </div>
+        <div
+          className={
+            mmrDiff > 0
+              ? "userDataGreen"
+              : mmrDiff < 0
+              ? "userDataRed"
+              : "userDataGray"
+          }
+        >
+          MMR {mmrDiff}
         </div>
         <div
           className={

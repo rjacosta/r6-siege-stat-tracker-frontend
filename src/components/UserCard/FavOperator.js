@@ -1,14 +1,12 @@
 import React from "react";
-import getOperatorType from "../../util/getOperatorType";
 
-const FavOperator = ({ opName }) => {
+const FavOperator = ({ opName, opType }) => {
   const opIcons = require.context(
     "../../../public/images/operators/operatorIcons"
   );
   const opPics = require.context(
     "../../../public/images/operators/operatorPics"
   );
-  const opType = getOperatorType(opName);
   const opNameLowerCase = opName.toLowerCase();
   return (
     <div

@@ -1,6 +1,5 @@
 const roundToPrecision = (x, precision) => {
-    var y = x + (precision === undefined ? 0.5 : precision / 2);
-    return y - (y % (precision === undefined ? 1 : precision));
-  };
+  return parseFloat(x.toFixed(precision));
+};
 
 export default roundToPrecision;

@@ -2,9 +2,10 @@
   background-color: black;
 }
 
-.title {
+.header {
   color: white;
   text-align: center;
+  text-decoration: none;
 }
 
 form {
@@ -24,6 +25,7 @@ form {
 
 .whiteText {
   color: white;
+  text-align: center;
 }
 
 .loader {
@@ -86,7 +88,7 @@ form {
 .userComparisonStatGrid {
   display: grid;  
   grid-template-columns: 100%;
-  grid-template-rows: 12% 12% 12% 12% 12% 12% 12% 12%;
+  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 11%;
   width: 100%
 }
 
@@ -213,7 +215,7 @@ form {
  }
 }
 
-.Attacker {
+.attacker {
   animation-name: attackOpAnimation;
   animation-duration: 1s;
 }
@@ -229,7 +231,7 @@ form {
  }
 }
 
-.Defender {
+.defender {
   animation-name: defenseOpAnimation;
   animation-duration: 1s;
 }

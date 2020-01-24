@@ -1,7 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import roundToPrecision from "../../util/roundToPrecision"
-import getOperator from "../../util/getOperator";
 import FavOperator from "./FavOperator";
 import Rank from "./Rank";
 
@@ -22,15 +20,11 @@ const UserCard = ({ userData, comparing }) => {
     maxRank,
     kills,
     deaths,
+    kd,
     wins,
-    losses
+    losses,
+    wl
   } = userData.rankedData;
-
-  const userFavAttacker = getOperator(userData.favattacker);
-  const userFavDefender = getOperator(userData.favdefender);
-
-  const userKd = roundToPrecision(kills / deaths, 0.005);
-  const userWl = roundToPrecision(wins / losses, 0.005);
 
   var aliasesList = Object.keys(userData.aliases)
     .map(key => userData.aliases[key])
@@ -43,8 +37,8 @@ const UserCard = ({ userData, comparing }) => {
   for (var i = 1; i <= 3; i++) {
     prevSeasonData.push([
       CURRENT_SEASON - i,
-      userData["season" + (CURRENT_SEASON - i) + "mmr"],
-      userData["season" + (CURRENT_SEASON - i) + "rank"]
+      userData.prevUserRankedData.data[i]["mmr"],
+      userData.prevUserRankedData.data[i]["rank"]
     ]);
   }
 
@@ -54,7 +48,7 @@ const UserCard = ({ userData, comparing }) => {
 
   return (
     <div className={comparing ? "userCardCompare" : "userCard"}>
-      {comparing ? null : <FavOperator opName={userFavAttacker} />}
+      {comparing ? null : <FavOperator opName={userData.favAttacker} opType="attacker" />}
       <div className="userNameAvatarRankContainer">
         <h2>{userData.name}</h2>
         <h5>Previous usernames: {aliasesList}</h5>
@@ -72,17 +66,17 @@ const UserCard = ({ userData, comparing }) => {
           <Rank mmr={maxMmr} rank={maxRank} isMax={true} />
         </div>
         <div className="userCardDataGridContainer">
-          <div className="userCardGridDataItem">W/L: {userWl}</div>
+          <div className="userCardGridDataItem">W/L: {wl}</div>
           <div className="userCardGridDataItem">Wins: {wins}</div>
           <div className="userCardGridDataItem">Losses: {losses}</div>
-          <div className="userCardGridDataItem">K/D: {userKd}</div>
+          <div className="userCardGridDataItem">K/D: {kd}</div>
           <div className="userCardGridDataItem">Kills: {kills}</div>
           <div className="userCardGridDataItem">Deaths: {deaths}</div>
         </div>
         <h3>{"Previous Ranks"}</h3>
         <div className="avatarAndRankGridContainer">{prevSeasonRankings}</div>
       </div>
-      {comparing ? null : <FavOperator opName={userFavDefender} />}
+      {comparing ? null : <FavOperator opName={userData.favDefender} opType="defender" />}
     </div>
   );
 };
