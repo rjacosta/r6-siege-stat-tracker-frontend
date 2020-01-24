@@ -8,6 +8,8 @@ const FavOperator = ({ opName, opType }) => {
     "../../../public/images/operators/operatorPics"
   );
   const opNameLowerCase = opName.toLowerCase();
+  const opTypeLowerCase = opType.toLowerCase();
+
   return (
     <div
       className="opTile"
@@ -23,7 +25,7 @@ const FavOperator = ({ opName, opType }) => {
       </span>
       <img
         alt="operator"
-        className={opType}
+        className={opTypeLowerCase}
         src={opPics(`./${opNameLowerCase}.png`)}
         width="320"
         height="600"
