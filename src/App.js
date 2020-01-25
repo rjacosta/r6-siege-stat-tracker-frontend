@@ -20,8 +20,6 @@ const App = () => {
 
   const compareUsers = event => {
     event.preventDefault();
-    setUserData({});
-    setUserCompareData({});
     setLoading(true);
     Promise.all([getUserData(username), getUserData(usernameCompare)]).then(
       ([userData, userCompareData]) => {
@@ -44,11 +42,9 @@ const App = () => {
 
   const searchUsername = event => {
     event.preventDefault();
-    setUserData({});
     setLoading(true);
     getUserData(username).then(userData => {
-      setUserData(userData);
-      if (userData !== null) {
+      if (userData !== null && userData.hasData) {
         setUserData(userData);
         history.push("/user/" + username);
       } else {

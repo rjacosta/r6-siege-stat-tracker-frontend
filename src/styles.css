@@ -199,7 +199,7 @@
 }
 
 /************* User Card Compare Styling *************/
-.userCardCompare {
+.userCardCompareFadeInLeft .userCardCompareFadeInRight {
   margin-top: 2% !important;
   margin: auto;
   width: 100%;
@@ -209,9 +209,40 @@
   border-radius: 15px; 
   justify-content: center;
   text-align: center;
-  animation-name: userCardFadeIn;
+}
+
+.userCardCompareFadeInLeft {
+  animation-name: userCardMoveFromLeft;
   animation-duration: 2s;
 }
+
+@keyframes userCardMoveFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-150%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.userCardCompareFadeInRight {
+  animation-name: userCardMoveFromRight;
+  animation-duration: 2s;
+}
+
+@keyframes userCardMoveFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 
 .userCardCompareGrid {
   margin-top: 2% !important;
@@ -219,6 +250,9 @@
   display: grid;  
   width: fit-content;
   height: 600px;
+  background-color: #575050;
+  color: white;
+  border-radius: 15px;
   grid-template-columns: 40% 20% 40%;
   justify-content: center;
   text-align: center;
@@ -228,7 +262,20 @@
   display: grid;  
   grid-template-columns: 100%;
   grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 11%;
-  width: 100%
+  width: 100%;
+  animation-name: userComparisonStatGridAnimation;
+  animation-duration: 2s;
+}
+
+@keyframes userComparisonStatGridAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(150%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .userDataGreen {
@@ -239,11 +286,11 @@
   background-color: red;
 }
 
-.userDataGray {
-  background-color: #575050;
+.userDataBlack {
+  background-color: black;
 }
 
-.userDataGreen, .userDataRed, .userDataGray {
+.userDataGreen, .userDataRed, .userDataBlack {
   margin: auto;
   display: flex;
   justify-content: center;

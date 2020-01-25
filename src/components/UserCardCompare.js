@@ -55,7 +55,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
 
   return (
     <div className="userCardCompareGrid">
-      <UserCard userData={userData} comparing={true} />
+      <UserCard userData={userData} comparing={true} fadeInDirection={"left"} />
       <div className="userComparisonStatGrid">
         <div
           className={
@@ -63,7 +63,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : rankDiff < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           rank {rankDiff}
@@ -74,7 +74,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : mmrDiff < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           MMR {mmrDiff}
@@ -85,7 +85,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : wlDiff < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           W/L: {wlDiff}
@@ -96,7 +96,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : winsDiff < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           Wins: {winsDiff}
@@ -107,7 +107,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : lossesDiff < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           Losses: {lossesDiff}
@@ -118,7 +118,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : kdDiff < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           K/D: {kdDiff}
@@ -129,7 +129,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : killsDiff < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           Kills: {killsDiff}
@@ -140,7 +140,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataRed"
               : deathsDiff < 0
               ? "userDataGreen"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           Deaths: {deathsDiff}
@@ -151,7 +151,7 @@ const UserCardCompare = ({ userData, userCompareData }) => {
               ? "userDataGreen"
               : compositeScore < 0
               ? "userDataRed"
-              : "userDataGray"
+              : "userDataBlack"
           }
         >
           Composite Score: {compositeScore}

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import FavOperator from "./FavOperator";
 import Rank from "./Rank";
 
-const UserCard = ({ userData, comparing }) => {
+const UserCard = ({ userData, comparing, fadeInDirection }) => {
   const CURRENT_SEASON = 16;
   const history = useHistory();
   if (!userData.hasData) {
@@ -47,7 +47,7 @@ const UserCard = ({ userData, comparing }) => {
   ));
 
   return (
-    <div className={comparing ? "userCardCompare" : "userCard"}>
+    <div className={(comparing ? (fadeInDirection === "left" ? "userCardCompareFadeInLeft" : "userCardCompareFadeInRight") : "userCard")}>
       {comparing ? null : <FavOperator opName={userData.favAttacker} opType="Attacker" />}
       <div className="userNameAvatarRankContainer">
         <h2 className="caption">{userData.name}</h2>
