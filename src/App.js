@@ -77,7 +77,7 @@ const App = () => {
   return (
     <div className="app">
       <Link style={{ textDecoration: "none" }} to="/">
-        <TextBubble text="Rainbow 6 Siege Stat Tracker" type={1} />
+        <TextBubble text="Rainbow 6 Siege Stat Tracker" type={"h1"} />
       </Link>
 
       <TextBubble
@@ -116,7 +116,7 @@ const App = () => {
               text="Welcome to Rainbow 6 Siege Stat Tracker! Enter in a username
                 above to find the stats of that user. You can also compare stats
                 between users using the compare with option."
-              type={3}
+              type={"h3"}
             />
           </Route>
           <Route path="/user">

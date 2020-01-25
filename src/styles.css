@@ -1,12 +1,8 @@
+/************* General App Styling *************/
 .app {
   display: grid;
   grid-template-columns: 70%;
   justify-content: center;
-  text-align: center;
-}
-
-.whiteText {
-  color: white;
   text-align: center;
 }
 
@@ -26,61 +22,20 @@
   100% { transform: rotate(360deg); }
 }
 
-.userCardCompare {
-  margin-top: 2% !important;
-  margin: auto;
-  width: 100%;
-  height: 600px;
-  color: white;
-  background-color: #575050;
-  border-radius: 15px; 
-  justify-content: center;
-  text-align: center;
-  animation-name: userCardFadeIn;
-  animation-duration: 2s;
-}
-
-.userCardCompareGrid {
-  margin-top: 2% !important;
-  margin: auto;
-  display: grid;  
-  width: fit-content;
-  height: 600px;
-  grid-template-columns: 40% 20% 40%;
-  justify-content: center;
-  text-align: center;
-}
-
-.userComparisonStatGrid {
-  display: grid;  
-  grid-template-columns: 100%;
-  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 11%;
-  width: 100%
-}
-
-.userDataGreen {
-  background-color: green;
-}
-
-.userDataRed {
-  background-color: red;
-}
-
-.userDataGray {
-  background-color: #575050;
-}
-
-.userDataGreen, .userDataRed, .userDataGray {
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.caption {
+  display: block;
+  background-color: black;
   border-radius: 15px;
-  width: 75%;
-  color: white;
-  height: 50%;
+  width: fit-content;
+  height: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
+/************* Text Bubble Styling *************/
 .textBubble {
   color: white;
   margin: auto;
@@ -101,20 +56,7 @@
   
 }
 
-.imgCaption {
-  display: block;
-  background-color: black;
-  border-radius: 15px;
-  width: fit-content;
-  height: fit-content;
-  padding-left: 10px;
-  padding-right: 10px;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-
+/************* User Card Styling *************/
 .userCard {
   background: #575050;
   margin-top: 1% !important;
@@ -205,6 +147,7 @@
   margin-top: 2%;
 }
 
+/************* Favorite Operator Stlying *************/
 @keyframes opBackground {
   0% {
     opacity: 0;
@@ -253,4 +196,60 @@
 .defender {
   animation-name: defenseOpAnimation;
   animation-duration: 1s;
+}
+
+/************* User Card Compare Styling *************/
+.userCardCompare {
+  margin-top: 2% !important;
+  margin: auto;
+  width: 100%;
+  height: 600px;
+  color: white;
+  background-color: #575050;
+  border-radius: 15px; 
+  justify-content: center;
+  text-align: center;
+  animation-name: userCardFadeIn;
+  animation-duration: 2s;
+}
+
+.userCardCompareGrid {
+  margin-top: 2% !important;
+  margin: auto;
+  display: grid;  
+  width: fit-content;
+  height: 600px;
+  grid-template-columns: 40% 20% 40%;
+  justify-content: center;
+  text-align: center;
+}
+
+.userComparisonStatGrid {
+  display: grid;  
+  grid-template-columns: 100%;
+  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 11%;
+  width: 100%
+}
+
+.userDataGreen {
+  background-color: green;
+}
+
+.userDataRed {
+  background-color: red;
+}
+
+.userDataGray {
+  background-color: #575050;
+}
+
+.userDataGreen, .userDataRed, .userDataGray {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  width: 75%;
+  color: white;
+  height: 50%;
 }

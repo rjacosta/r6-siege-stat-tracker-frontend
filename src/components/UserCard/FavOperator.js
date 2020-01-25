@@ -19,7 +19,7 @@ const FavOperator = ({ opName, opType }) => {
         backgroundSize: "320px 320px"
       }}
     >
-      <span className="imgCaption">
+      <span className="caption">
         Favorite {opType} <br />
         {opName}
       </span>

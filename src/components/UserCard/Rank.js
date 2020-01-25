@@ -6,7 +6,7 @@ const Rank = ({ seasonNumber, mmr, rank, isMax }) => {
   const seasonName = getSeason(seasonNumber);
   return (
     <div>
-      <span className="imgCaption">{isMax ? "Max Rank" : seasonName}</span>
+      <span className="caption">{isMax ? "Max Rank" : seasonName}</span>
       <img
         alt="Rank"
         className="userRank"
@@ -15,7 +15,7 @@ const Rank = ({ seasonNumber, mmr, rank, isMax }) => {
         width="146"
         height="146"
       />
-      <span className="imgCaption">
+      <span className="caption">
         {isMax ? "Max " : ""}MMR: {mmr}
       </span>
     </div>
