@@ -54,9 +54,10 @@ const App = () => {
     });
   };
 
+  const usernameSearchEndpoint = "/userData?username=";
   const getUserData = username => {
     return new Promise((resolve, reject) => {
-      fetch("http://localhost:8080/userData?username=" + username)
+      fetch(process.env.REACT_APP_BACKEND_URL + usernameSearchEndpoint + username)
         .then(response => response.json())
         .then(data => {
           if (data.hasData) {
