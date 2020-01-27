@@ -84,7 +84,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Link style={{ textDecoration: "none" }} to="/">
+      <Link onClick={() => setLoadError(false)} style={{ textDecoration: "none" }} to="/">
         <TextBubble text="Rainbow 6 Siege Stat Tracker" type={"h1"} />
       </Link>
 
