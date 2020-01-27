@@ -11,6 +11,7 @@ const App = () => {
   const [userData, setUserData] = useState({});
   const [userCompareData, setUserCompareData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
 
   const onUsernameInput = event => {
     event.target.id === "username"
@@ -21,9 +22,11 @@ const App = () => {
   const compareUsers = event => {
     event.preventDefault();
     setLoading(true);
+    setLoadError(false);
     Promise.all([getUserData(username), getUserData(usernameCompare)]).then(
       ([userData, userCompareData]) => {
-        if (userData.hasData && userCompareData.hasData) {
+        if (userData !== null && userData.hasData 
+          && userCompareData !== null && userCompareData.hasData) {
           setUserData(userData);
           setUserCompareData(userCompareData);
           history.push(
@@ -33,6 +36,8 @@ const App = () => {
               usernameCompare
           );
         } else {
+          setUserData({});
+          setLoadError(true);
           history.push("/");
         }
         setLoading(false);
@@ -43,11 +48,15 @@ const App = () => {
   const searchUsername = event => {
     event.preventDefault();
     setLoading(true);
+    setLoadError(false);
     getUserData(username).then(userData => {
       if (userData !== null && userData.hasData) {
         setUserData(userData);
         history.push("/user/" + username);
       } else {
+        setUserData({});
+        setUserCompareData({});
+        setLoadError(true);
         history.push("/");
       }
       setLoading(false);
@@ -57,7 +66,9 @@ const App = () => {
   const usernameSearchEndpoint = "/userData?username=";
   const getUserData = username => {
     return new Promise((resolve, reject) => {
-      fetch(process.env.REACT_APP_BACKEND_URL + usernameSearchEndpoint + username)
+      fetch(
+        process.env.REACT_APP_BACKEND_URL + usernameSearchEndpoint + username
+      )
         .then(response => response.json())
         .then(data => {
           if (data.hasData) {
@@ -110,9 +121,15 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <TextBubble
-              text="Welcome to Rainbow 6 Siege Stat Tracker! Enter in a username
-                above to find the stats of that user. You can also compare stats
-                between users using the compare with option."
+              text={!loadError 
+                ? "Welcome to Rainbow 6 Siege Stat Tracker! Enter in a username"
+                + " above to find the stats of that user. You can also compare stats"
+                + " between users using the compare with option. A great user to"
+                + " start with would be the site's creator's, 'KirklandVodka.'. A great" 
+                + " user to compare with them would be 'KirklandTequila'."  
+                : "Sorry, either you entered an unused username or some kind of error" 
+                + " occured while getting the user(s) data. Please correctly spell the"
+                + " user(s) name or try again later."}
               type={"h3"}
             />
           </Route>
