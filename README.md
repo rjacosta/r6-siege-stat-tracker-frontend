@@ -5,6 +5,9 @@ look up my user 'KirklandVodka.'. You are also welcome to compare my stats with 
 
 I get all user stats from the [R6Tab API](https://github.com/Tabwire/R6Tab-API) created by Tabwire.
 
+## Demo
+[Rainbow 6 Siege Stat Tracker Demo](demo/r6SiegeStatTrackerDemo.gif)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
