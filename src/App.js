@@ -125,7 +125,7 @@ const App = () => {
                 ? "Welcome to Rainbow 6 Siege Stat Tracker! Enter in a username"
                 + " above to find the stats of that user. You can also compare stats"
                 + " between users using the compare with option. A great user to"
-                + " start with would be the site's creator's, 'KirklandVodka.'. A great" 
+                + " start with would be the site's creator's, 'KirklandVodka'. A great" 
                 + " user to compare with them would be 'KirklandTequila'."  
                 : "Sorry, either you entered an unused username or some kind of error" 
                 + " occured while getting the user(s) data. Please correctly spell the"
