@@ -2,9 +2,9 @@ import React from "react";
 
 const FavOperator = (props) => {
     
-  var {name, role} = props.operatorData;
-  if (props.operatorData.name.startsWith("J") && props.operatorData.name.endsWith("ger"))
-    name = "Jager";
+  const {name, role} = props.operatorData;
+  /*if (props.operatorData.name.startsWith("J") && props.operatorData.name.endsWith("ger"))
+    name = "Jager";*/
   const opIcons = require.context(
     "../../../public/images/operators/operatorIcons"
   );
