@@ -1,7 +1,7 @@
 # r6-siege-stat-tracker-frontend
 This is a React app that can be used to search the stats and information of players on Rainbow Six Siege. This app is hosted by Heroku 
 at https://r6-siege-stat-tracker-frontend.herokuapp.com. If you are new to Rainbow 6 Siege and don't know any users, then feel free to 
-look up my user 'KirklandVodka.'. You are also welcome to compare my stats with a friend of mine 'KirklandTequila'. 
+look up my user 'KirklandVodka'. You are also welcome to compare my stats with a friend of mine 'KirklandTequila'. 
 
 I get all user stats from the [R6Tab API](https://github.com/Tabwire/R6Tab-API) created by Tabwire.
 
