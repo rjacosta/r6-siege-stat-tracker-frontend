@@ -51,6 +51,7 @@ const App = () => {
     setLoadError(false);
     getUserData(username).then(userData => {
       if (userData !== null && userData.hasData) {
+        console.log(userData)
         setUserData(userData);
         history.push("/user/" + username);
       } else {
@@ -71,6 +72,7 @@ const App = () => {
       )
         .then(response => response.json())
         .then(data => {
+          console.log(data)
           if (data.hasData) {
             setLoading(false);
             resolve(data);

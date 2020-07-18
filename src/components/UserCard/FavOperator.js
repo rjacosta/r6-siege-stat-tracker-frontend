@@ -1,6 +1,10 @@
 import React from "react";
 
-const FavOperator = ({ opName, opType }) => {
+const FavOperator = (props) => {
+    
+  var {name, role} = props.operatorData;
+  if (props.operatorData.name.startsWith("J") && props.operatorData.name.endsWith("ger"))
+    name = "Jager";
   const opIcons = require.context(
     "../../../public/images/operators/operatorIcons"
   );
@@ -8,26 +12,27 @@ const FavOperator = ({ opName, opType }) => {
   const opPics = require.context(
     "../../../public/images/operators/operatorPics"
   );
-  const opNameLowerCase = opName.toLowerCase();
-  const opTypeLowerCase = opType.toLowerCase();
+
+  const nameLowerCase = name.toLowerCase();
+  const roleLowerCase = role.toLowerCase();
 
   return (
     <div
       className="opTile"
       style={{
-        backgroundImage: `url(${opIcons(`./${opNameLowerCase}.png`)})`,
+        backgroundImage: `url(${opIcons(`./${nameLowerCase}.png`)})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "320px 320px"
       }}
     >
       <span className="caption">
-        Favorite {opType} <br />
-        {opName}
+        Favorite {role} <br />
+        {name}
       </span>
       <img
         alt="operator"
-        className={opTypeLowerCase}
-        src={opPics(`./${opNameLowerCase}.png`)}
+        className={roleLowerCase}
+        src={opPics(`./${nameLowerCase}.png`)}
         width="320"
         height="600"
       />

@@ -10,10 +10,12 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
     history.goBack();
     return null;
   }
-
-  const AVATAR_URL =
-    "https://ubisoft-avatars.akamaized.net/p_user/default_146_146.png";
   const {
+    genericUserData,
+    seasonalUserData,
+    operatorsUserData
+  } = userData;
+  /*const {
     mmr,
     maxMmr,
     rank,
@@ -24,16 +26,17 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
     wins,
     losses,
     wl
-  } = userData.rankedData;
+  } = userData.rankedData;*/
+  console.log(genericUserData)
 
-  var aliasesList = Object.keys(userData.aliases)
-    .map(key => userData.aliases[key])
+  var aliasesList = Object.keys(genericUserData.aliases)
+    .map(key => genericUserData.aliases[key])
     .reduce((list, alias) => {
       return list + alias + ", ";
     }, "");
   aliasesList = aliasesList.slice(0, aliasesList.length - 2);
 
-  const prevSeasonData = [];
+  /*const prevSeasonData = [];
   for (var i = 1; i <= 3; i++) {
     prevSeasonData.push([
       CURRENT_SEASON - i,
@@ -45,38 +48,38 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
   const prevSeasonRankings = prevSeasonData.map(data => (
     <Rank key={data[0]} seasonNumber={data[0]} mmr={data[1]} rank={data[2]} />
   ));
-
+  */
   return (
     <div className={(comparing ? (fadeInDirection === "left" ? "userCardCompareFadeInLeft" : "userCardCompareFadeInRight") : "userCard")}>
-      {comparing ? null : <FavOperator opName={userData.favAttacker} opType="Attacker" />}
+      {comparing ? null : <FavOperator operatorData={operatorsUserData.favAttacker} />}
       <div className="userNameAvatarRankContainer">
-        <h2 className="caption">{userData.name}</h2>
+        <h2 className="caption">{genericUserData.name}</h2>
         <h4 className="caption">{`Previous usernames:  ${aliasesList}`}</h4>
         <div className="avatarAndRankGridContainer">
           <div>
             <img
               alt="Avatar"
-              src={AVATAR_URL.replace("p_user", userData.id)}
+              src={genericUserData.avatarURL}
               width="169"
               height="169"
             />
-            <span className="caption">Level: {userData.level}</span>
+            <span className="caption">Level: {genericUserData.level}</span>
           </div>
-          <Rank seasonNumber={CURRENT_SEASON} mmr={mmr} rank={rank} />
-          <Rank mmr={maxMmr} rank={maxRank} isMax={true} />
+          {/*<Rank seasonNumber={CURRENT_SEASON} mmr={mmr} rank={rank} />
+          <Rank mmr={maxMmr} rank={maxRank} isMax={true} />*/}
         </div>
         <div className="userCardDataGridContainer">
-          <div className="userCardGridDataItem">W/L: {wl}</div>
-          <div className="userCardGridDataItem">Wins: {wins}</div>
-          <div className="userCardGridDataItem">Losses: {losses}</div>
-          <div className="userCardGridDataItem">K/D: {kd}</div>
-          <div className="userCardGridDataItem">Kills: {kills}</div>
-          <div className="userCardGridDataItem">Deaths: {deaths}</div>
+          <div className="userCardGridDataItem">W/L: {genericUserData.wl}</div>
+          <div className="userCardGridDataItem">Wins: {genericUserData.wins}</div>
+          <div className="userCardGridDataItem">Losses: {genericUserData.losses}</div>
+          <div className="userCardGridDataItem">K/D: {genericUserData.kd}</div>
+          <div className="userCardGridDataItem">Kills: {genericUserData.kills}</div>
+          <div className="userCardGridDataItem">Deaths: {genericUserData.deaths}</div>
         </div>
-        <h3 className="caption">{"Previous Ranks"}</h3>
-        <div className="avatarAndRankGridContainer">{prevSeasonRankings}</div>
+        {/*<h3 className="caption">{"Previous Ranks"}</h3>
+        <div className="avatarAndRankGridContainer">{prevSeasonRankings}</div>*/}
       </div>
-      {comparing ? null : <FavOperator opName={userData.favDefender} opType="Defender" />}
+      {comparing ? null : <FavOperator operatorData={operatorsUserData.favDefender} />}
     </div>
   );
 };
