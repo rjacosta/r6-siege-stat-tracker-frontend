@@ -4,7 +4,6 @@ import FavOperator from "./FavOperator";
 import Rank from "./Rank";
 
 const UserCard = ({ userData, comparing, fadeInDirection }) => {
-  const CURRENT_SEASON = 16;
   const history = useHistory();
   if (!userData.hasData) {
     history.goBack();
@@ -15,18 +14,7 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
     seasonalUserData,
     operatorsUserData
   } = userData;
-  /*const {
-    mmr,
-    maxMmr,
-    rank,
-    maxRank,
-    kills,
-    deaths,
-    kd,
-    wins,
-    losses,
-    wl
-  } = userData.rankedData;*/
+
   console.log(genericUserData)
 
   var aliasesList = Object.keys(genericUserData.aliases)
@@ -36,7 +24,7 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
     }, "");
   aliasesList = aliasesList.slice(0, aliasesList.length - 2);
 
-  /*const prevSeasonData = [];
+  const prevSeasonData = [];
   for (var i = 1; i <= 3; i++) {
     prevSeasonData.push([
       CURRENT_SEASON - i,
@@ -48,7 +36,9 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
   const prevSeasonRankings = prevSeasonData.map(data => (
     <Rank key={data[0]} seasonNumber={data[0]} mmr={data[1]} rank={data[2]} />
   ));
-  */
+  
+  const currSeason = seasonalUserData.seasons[0];
+  
   return (
     <div className={(comparing ? (fadeInDirection === "left" ? "userCardCompareFadeInLeft" : "userCardCompareFadeInRight") : "userCard")}>
       {comparing ? null : <FavOperator operatorData={operatorsUserData.favAttacker} />}
