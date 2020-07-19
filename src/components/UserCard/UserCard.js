@@ -15,8 +15,6 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
     operatorsUserData
   } = userData;
 
-  console.log(genericUserData)
-
   var aliasesList = Object.keys(genericUserData.aliases)
     .map(key => genericUserData.aliases[key])
     .reduce((list, alias) => {
@@ -25,13 +23,13 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
   aliasesList = aliasesList.slice(0, aliasesList.length - 2);
 
   const prevSeasonData = [];
-  for (var i = 1; i <= 3; i++) {
+  /*for (var i = 1; i <= 3; i++) {
     prevSeasonData.push([
       CURRENT_SEASON - i,
       userData.prevUserRankedData.data[i]["mmr"],
       userData.prevUserRankedData.data[i]["rank"]
     ]);
-  }
+  }*/
 
   const prevSeasonRankings = prevSeasonData.map(data => (
     <Rank key={data[0]} seasonNumber={data[0]} mmr={data[1]} rank={data[2]} />
@@ -55,6 +53,7 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
             />
             <span className="caption">Level: {genericUserData.level}</span>
           </div>
+          <Rank seasonalUserData={seasonalUserData.seasons[0]} showMaxStats={true} />
           {/*<Rank seasonNumber={CURRENT_SEASON} mmr={mmr} rank={rank} />
           <Rank mmr={maxMmr} rank={maxRank} isMax={true} />*/}
         </div>

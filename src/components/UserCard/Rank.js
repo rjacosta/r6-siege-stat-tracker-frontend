@@ -1,17 +1,25 @@
 import React from "react";
-import getSeason from "../../util/getSeason";
 
-const Rank = ({ seasonNumber, mmr, rank, isMax }) => {
-  const ranks = require.context("../../../public/images/rank");
-  const seasonName = getSeason(seasonNumber);
+const Rank = ({seasonalUserData, showMaxStats}) => {
+  return (
+    <div className="rankGridContainer">
+      {BasicRankStructure(seasonalUserData.name, seasonalUserData.mmr, seasonalUserData.rankImgURL, false)}
+      {showMaxStats && BasicRankStructure(seasonalUserData.name, seasonalUserData.maxmmr, seasonalUserData.maxRankImgURL, true)}
+    </div>
+  );
+};
+
+const BasicRankStructure = (name, mmr, rankImgURL, isMax) => {
+  console.log(rankImgURL)
+
   return (
     <div>
-      <span className="caption">{isMax ? "Max Rank" : seasonName}</span>
+      <span className="caption">{isMax ? "Max Rank" : name}</span>
       <img
         alt="Rank"
         className="userRank"
         id="rank"
-        src={ranks(`./${rank}.png`)}
+        src={rankImgURL}
         width="146"
         height="146"
       />
@@ -20,6 +28,5 @@ const Rank = ({ seasonNumber, mmr, rank, isMax }) => {
       </span>
     </div>
   );
-};
-
+}
 export default Rank;
