@@ -1,17 +1,6 @@
 import React from "react";
 
-const Rank = ({seasonalUserData, showMaxStats}) => {
-  return (
-    <div className="rankGridContainer">
-      {BasicRankStructure(seasonalUserData.name, seasonalUserData.mmr, seasonalUserData.rankImgURL, false)}
-      {showMaxStats && BasicRankStructure(seasonalUserData.name, seasonalUserData.maxmmr, seasonalUserData.maxRankImgURL, true)}
-    </div>
-  );
-};
-
-const BasicRankStructure = (name, mmr, rankImgURL, isMax) => {
-  console.log(rankImgURL)
-
+const Rank = ({name, rankData, isMax}) => {
   return (
     <div>
       <span className="caption">{isMax ? "Max Rank" : name}</span>
@@ -19,14 +8,15 @@ const BasicRankStructure = (name, mmr, rankImgURL, isMax) => {
         alt="Rank"
         className="userRank"
         id="rank"
-        src={rankImgURL}
+        src={rankData.rankImgURL}
         width="146"
         height="146"
       />
       <span className="caption">
-        {isMax ? "Max " : ""}MMR: {mmr}
+        {isMax ? "Max " : ""}MMR: {rankData.mmr}
       </span>
     </div>
   );
-}
+};
+
 export default Rank;

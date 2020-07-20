@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FavOperator = (props) => {
     
@@ -13,6 +13,26 @@ const FavOperator = (props) => {
     "../../../public/images/operators/operatorPics"
   );
 
+  const [hovering, setHovering] = useState(false);
+  const [clientX, setClientX] = useState(0);
+  const [clientY, setClientY] = useState(0);
+  const onHoverEnter = () => setHovering(true);
+  const onHoverLeave = () => setHovering(false);
+  const getMouseCoord = (e) => {
+    setClientX(e.clientX)
+    setClientY(e.clientY)
+  }
+  const operatorInfo = hovering && (
+    <span style={{
+      position: "absolute",
+      top: clientY,
+      left: clientX,
+      backgroundColor: "black"
+    }} >
+      Operator Info
+    </span>
+  )
+
   const nameLowerCase = name.toLowerCase();
   const roleLowerCase = role.toLowerCase();
 
@@ -22,8 +42,12 @@ const FavOperator = (props) => {
       style={{
         backgroundImage: `url(${opIcons(`./${nameLowerCase}.png`)})`,
         backgroundRepeat: "no-repeat",
-        backgroundSize: "320px 320px"
+        backgroundSize: "320px 320px",
+        cursor: "none"
       }}
+      onMouseMove={getMouseCoord}
+      onMouseEnter={onHoverEnter}
+      onMouseLeave={onHoverLeave}
     >
       <span className="caption">
         Favorite {role} <br />
@@ -36,6 +60,7 @@ const FavOperator = (props) => {
         width="320"
         height="600"
       />
+    {operatorInfo}
     </div>
   );
 };

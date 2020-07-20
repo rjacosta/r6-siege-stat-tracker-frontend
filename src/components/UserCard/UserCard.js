@@ -17,25 +17,17 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
 
   var aliasesList = Object.keys(genericUserData.aliases)
     .map(key => genericUserData.aliases[key])
+    .filter(alias => alias !== genericUserData.name)
     .reduce((list, alias) => {
       return list + alias + ", ";
     }, "");
   aliasesList = aliasesList.slice(0, aliasesList.length - 2);
 
-  const prevSeasonData = [];
-  /*for (var i = 1; i <= 3; i++) {
-    prevSeasonData.push([
-      CURRENT_SEASON - i,
-      userData.prevUserRankedData.data[i]["mmr"],
-      userData.prevUserRankedData.data[i]["rank"]
-    ]);
-  }*/
-
-  const prevSeasonRankings = prevSeasonData.map(data => (
-    <Rank key={data[0]} seasonNumber={data[0]} mmr={data[1]} rank={data[2]} />
-  ));
-  
   const currSeason = seasonalUserData.seasons[0];
+
+  var prevRanksList = seasonalUserData.seasons.slice(1, 4).map((season) => 
+    <Rank key={season.name} name={season.name} rankData={season.rankData} isMax={false} />
+  );
   
   return (
     <div className={(comparing ? (fadeInDirection === "left" ? "userCardCompareFadeInLeft" : "userCardCompareFadeInRight") : "userCard")}>
@@ -53,9 +45,8 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
             />
             <span className="caption">Level: {genericUserData.level}</span>
           </div>
-          <Rank seasonalUserData={seasonalUserData.seasons[0]} showMaxStats={true} />
-          {/*<Rank seasonNumber={CURRENT_SEASON} mmr={mmr} rank={rank} />
-          <Rank mmr={maxMmr} rank={maxRank} isMax={true} />*/}
+          <Rank name={currSeason.name} rankData={currSeason.rankData} isMax={false} />
+          <Rank name={currSeason.name} rankData={currSeason.maxRankData} isMax={true} />
         </div>
         <div className="userCardDataGridContainer">
           <div className="userCardGridDataItem">W/L: {genericUserData.wl}</div>
@@ -65,8 +56,10 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
           <div className="userCardGridDataItem">Kills: {genericUserData.kills}</div>
           <div className="userCardGridDataItem">Deaths: {genericUserData.deaths}</div>
         </div>
-        {/*<h3 className="caption">{"Previous Ranks"}</h3>
-        <div className="avatarAndRankGridContainer">{prevSeasonRankings}</div>*/}
+        <h3 className="caption">{"Previous Ranks"}</h3>
+        <div className="avatarAndRankGridContainer">
+          {prevRanksList}
+        </div>
       </div>
       {comparing ? null : <FavOperator operatorData={operatorsUserData.favDefender} />}
     </div>

@@ -13,35 +13,25 @@ const UserCardCompare = ({ userData, userCompareData }) => {
   }
 
   const {
-    mmr: userMMR,
-    rank: userRank,
-    kills: userKills,
-    deaths: userDeaths,
-    kd: userKd,
-    wins: userWins,
-    losses: userLosses,
-    wl: userWl
-  } = userData.rankedData;
-
+    genericUserData,
+    seasonalUserData,
+  } = userData;
   const {
-    mmr: userCompareMMR,
-    rank: userCompareRank,
-    kills: userCompareKills,
-    deaths: userCompareDeaths,
-    kd: userCompareKd,
-    wins: userCompareWins,
-    losses: userCompareLosses,
-    wl: userCompareWl
-  } = userCompareData.rankedData;
+    genericUserData : genericUserCompareData,
+    seasonalUserData : seasonalUserCompareData
+  } = userCompareData;
 
-  const mmrDiff = userMMR - userCompareMMR;
-  const rankDiff = userRank - userCompareRank;
-  const wlDiff = roundToPrecision(userWl - userCompareWl, 2);
-  const winsDiff = userWins - userCompareWins;
-  const lossesDiff = userLosses - userCompareLosses;
-  const kdDiff = roundToPrecision(userKd - userCompareKd, 2);
-  const killsDiff = userKills - userCompareKills;
-  const deathsDiff = userDeaths - userCompareDeaths;
+  var userRankData = seasonalUserData.seasons[0].rankData;
+  var userCompareRankData = seasonalUserCompareData.seasons[0].rankData;
+
+  const mmrDiff = userRankData.mmr - userCompareRankData.mmr;
+  const rankDiff = userRankData.rankNumber - userCompareRankData.rankNumber;
+  const wlDiff = roundToPrecision(genericUserData.wl - genericUserCompareData.wl, 2);
+  const winsDiff = genericUserData.wins - genericUserCompareData.wins;
+  const lossesDiff = genericUserData.losses - genericUserCompareData.losses;
+  const kdDiff = roundToPrecision(genericUserData.kd - genericUserCompareData.kd, 2);
+  const killsDiff = genericUserData.kills - genericUserCompareData.kills;
+  const deathsDiff = genericUserData.deaths - genericUserCompareData.deaths;
 
   const compositeScore = 
     (mmrDiff > 0 ? 1 : (mmrDiff < 0 ? -1 : 0))
