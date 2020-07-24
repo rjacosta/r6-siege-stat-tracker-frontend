@@ -62,8 +62,8 @@
   margin-top: 1% !important;
   margin: auto;
   display: grid;
-  width: 100%;
-  height: 600px;
+  width: 50vw;
+  height: 50vh;
   grid-template-columns: 25% 50% 25%;
   color: white;
   border-radius: 15px;
@@ -92,27 +92,36 @@
   grid-template-rows: 200px;
   justify-content: center;
 }
-.userCardDataGridContainer {
-  display: grid;
-  grid-template-columns: 20% 20% 20%;
-  grid-template-rows: 50% 50% 50%;
-  justify-content: center;
+
+.userCardDataGridContainer{
   grid-row-gap: 25%;
-  grid-column-gap: 5%;
-  margin-bottom: 4%;
+  margin-bottom: 2%;
 }
 
-.userCardGridDataItem {
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.opInfoContainer {
+  position: absolute;
+  background: #333333;
   border-radius: 15px;
-  width: 100%;
-  background-color: black;
+  z-index: 1;
+  text-align: center;
+  justify-content: center;
+  width: 13%;
+  height: 5%;
 }
 
-@media (max-width: 1300px) {
+.opDataGridContainer {
+  margin-top: 3.5%;
+  grid-row-gap: 30%;
+}
+
+.dataGridContainer, .userCardDataGridContainer, .opDataGridContainer {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 50% 50%;
+  justify-content: center;
+}
+
+@media (max-width: 2100px) {
   .opTile {
     display: none;
   }
@@ -167,10 +176,13 @@
 .opTile {
   text-align: center;
   margin-top: 5%;
+  width: 100%;
+  height: 41%;
 }
 
 .opTileTitle {
   text-align: center;
+  width: 100%;
 }
 
 @keyframes attackOpAnimation {

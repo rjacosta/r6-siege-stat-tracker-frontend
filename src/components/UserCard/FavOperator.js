@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
-const FavOperator = (props) => {
+import Stats from "./Stats.js"
+const FavOperator = ({operatorData}) => {
     
-  const {name, role} = props.operatorData;
-  /*if (props.operatorData.name.startsWith("J") && props.operatorData.name.endsWith("ger"))
-    name = "Jager";*/
+  const {name, role} = operatorData;
   const opIcons = require.context(
     "../../../public/images/operators/operatorIcons"
   );
@@ -23,14 +21,14 @@ const FavOperator = (props) => {
     setClientY(e.clientY)
   }
   const operatorInfo = hovering && (
-    <span style={{
-      position: "absolute",
-      top: clientY,
-      left: clientX,
-      backgroundColor: "black"
+    <div 
+      className="opInfoContainer"
+      style={{
+      top: clientY - 20 + 'px',
+      left: clientX - 160 + 'px'
     }} >
-      Operator Info
-    </span>
+      <Stats stats={operatorData}/>
+    </div>
   )
 
   const nameLowerCase = name.toLowerCase();
@@ -45,9 +43,6 @@ const FavOperator = (props) => {
         backgroundSize: "320px 320px",
         cursor: "none"
       }}
-      onMouseMove={getMouseCoord}
-      onMouseEnter={onHoverEnter}
-      onMouseLeave={onHoverLeave}
     >
       <span className="caption">
         Favorite {role} <br />
@@ -59,6 +54,9 @@ const FavOperator = (props) => {
         src={opPics(`./${nameLowerCase}.png`)}
         width="320"
         height="600"
+        onMouseMove={getMouseCoord}
+        onMouseOver={onHoverEnter}
+        onMouseLeave={onHoverLeave}
       />
     {operatorInfo}
     </div>

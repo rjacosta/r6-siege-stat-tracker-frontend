@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import FavOperator from "./FavOperator";
 import Rank from "./Rank";
+import Stats from "./Stats";
 
 const UserCard = ({ userData, comparing, fadeInDirection }) => {
   const history = useHistory();
@@ -48,14 +49,7 @@ const UserCard = ({ userData, comparing, fadeInDirection }) => {
           <Rank name={currSeason.name} rankData={currSeason.rankData} isMax={false} />
           <Rank name={currSeason.name} rankData={currSeason.maxRankData} isMax={true} />
         </div>
-        <div className="userCardDataGridContainer">
-          <div className="userCardGridDataItem">W/L: {genericUserData.wl}</div>
-          <div className="userCardGridDataItem">Wins: {genericUserData.wins}</div>
-          <div className="userCardGridDataItem">Losses: {genericUserData.losses}</div>
-          <div className="userCardGridDataItem">K/D: {genericUserData.kd}</div>
-          <div className="userCardGridDataItem">Kills: {genericUserData.kills}</div>
-          <div className="userCardGridDataItem">Deaths: {genericUserData.deaths}</div>
-        </div>
+        <Stats stats={genericUserData}/>
         <h3 className="caption">{"Previous Ranks"}</h3>
         <div className="avatarAndRankGridContainer">
           {prevRanksList}
