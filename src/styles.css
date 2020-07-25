@@ -1,7 +1,7 @@
 /************* General App Styling *************/
 .app {
   display: grid;
-  grid-template-columns: 70%;
+  grid-template-columns: 100%;
   justify-content: center;
   text-align: center;
 }
@@ -62,8 +62,8 @@
   margin-top: 1% !important;
   margin: auto;
   display: grid;
-  width: 50vw;
-  height: 50vh;
+  width: 65vw;
+  height: 65vh;
   grid-template-columns: 25% 50% 25%;
   color: white;
   border-radius: 15px;
@@ -93,35 +93,62 @@
   justify-content: center;
 }
 
-.userCardDataGridContainer{
+.userCardDataGridContainer {
   grid-row-gap: 25%;
   margin-bottom: 2%;
 }
 
-.opInfoContainer {
-  position: absolute;
-  background: #333333;
-  border-radius: 15px;
-  z-index: 1;
-  text-align: center;
-  justify-content: center;
-  width: 13%;
-  height: 5%;
-}
-
-.opDataGridContainer {
+.opDataGridContainer, .opDataGridContainerShow, .opDataGridContainerHide {
   margin-top: 3.5%;
   grid-row-gap: 30%;
 }
 
-.dataGridContainer, .userCardDataGridContainer, .opDataGridContainer {
+.opDataGridContainerShow {
+  animation-name: opDataGridContainerAnimationShow;
+  animation-duration: .2s;
+  animation-delay: .5s;
+  height: 50%;
+}
+
+.opDataGridContainerHide {
+  animation-name: opDataGridContainerAnimationHide;
+  animation-duration: .1s;
+  height: 0%;
+  visibility: hidden;
+}
+
+@keyframes opDataGridContainerAnimationShow {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 50%;
+  }
+}
+
+@keyframes opDataGridContainerAnimationHide {
+  0% {
+    height: 50%;
+    visibility: visible;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    height: 0%;
+    visibility: hidden;
+  }
+}
+
+.dataGridContainer, .userCardDataGridContainer, .opDataGridContainer,
+.opDataGridContainerShow, .opDataGridContainerHide {
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 50% 50%;
   justify-content: center;
 }
 
-@media (max-width: 2100px) {
+@media (max-width: 1919px) {
   .opTile {
     display: none;
   }
@@ -174,15 +201,64 @@
 }
 
 .opTile {
+  position: relative;
   text-align: center;
   margin-top: 5%;
   width: 100%;
-  height: 41%;
+  height: 40%;
+  background-repeat: no-repeat;
+  background-size: 320px 320px;
+  background-position: 50% 10%;
 }
 
 .opTileTitle {
   text-align: center;
   width: 100%;
+}
+
+.opInfoContainer, .opInfoContainerShow, .opInfoContainerHide {
+  position: absolute;
+  background: #333333;
+  border-radius: 15px;
+  top: 110%;
+  left: -5%;
+  z-index: 1;
+  width: 110%;
+  height: 27.5%;
+}
+
+.opInfoContainerShow {
+  animation-name: opInfoContainerAnimationShow;
+  animation-duration: .30s;
+  height: 27.5%;
+}
+
+.opInfoContainerHide {
+  animation-name: opInfoContainerAnimationHide;
+  animation-duration: .30s;
+  height: 0%;
+}
+
+@keyframes opInfoContainerAnimationShow {
+  0% {
+    height: 0%;
+    top: 124%;
+  }
+  100% {
+    height: 27.5%;
+    top: 110%;
+  }
+}
+
+@keyframes opInfoContainerAnimationHide {
+  0% {
+    height: 27.5%;
+    top: 110%;
+  }
+  100% {
+    height: 0%;
+    top: 124%;
+  }
 }
 
 @keyframes attackOpAnimation {

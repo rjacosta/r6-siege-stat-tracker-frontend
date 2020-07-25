@@ -11,25 +11,15 @@ const FavOperator = ({operatorData}) => {
     "../../../public/images/operators/operatorPics"
   );
 
-  const [hovering, setHovering] = useState(false);
-  const [clientX, setClientX] = useState(0);
-  const [clientY, setClientY] = useState(0);
-  const onHoverEnter = () => setHovering(true);
-  const onHoverLeave = () => setHovering(false);
-  const getMouseCoord = (e) => {
-    setClientX(e.clientX)
-    setClientY(e.clientY)
-  }
-  const operatorInfo = hovering && (
-    <div 
-      className="opInfoContainer"
-      style={{
-      top: clientY - 20 + 'px',
-      left: clientX - 160 + 'px'
-    }} >
-      <Stats stats={operatorData}/>
-    </div>
-  )
+  const [showOpInfo, setShowOpInfo] = useState(false);
+  const toggleOpInfo = () => {
+    setShowOpInfo(!showOpInfo);
+  };
+  const operatorInfo = 
+  <div id={"opInfoContainer" + role}
+    className={showOpInfo ? "opInfoContainerShow" : "opInfoContainerHide"}>
+      <Stats stats={operatorData} showOpInfo={showOpInfo} />
+   </div>
 
   const nameLowerCase = name.toLowerCase();
   const roleLowerCase = role.toLowerCase();
@@ -39,9 +29,6 @@ const FavOperator = ({operatorData}) => {
       className="opTile"
       style={{
         backgroundImage: `url(${opIcons(`./${nameLowerCase}.png`)})`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "320px 320px",
-        cursor: "none"
       }}
     >
       <span className="caption">
@@ -54,11 +41,9 @@ const FavOperator = ({operatorData}) => {
         src={opPics(`./${nameLowerCase}.png`)}
         width="320"
         height="600"
-        onMouseMove={getMouseCoord}
-        onMouseOver={onHoverEnter}
-        onMouseLeave={onHoverLeave}
+        onMouseDown={toggleOpInfo}
       />
-    {operatorInfo}
+      {operatorInfo}
     </div>
   );
 };
