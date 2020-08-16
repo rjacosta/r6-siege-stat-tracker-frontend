@@ -98,50 +98,85 @@
   margin-bottom: 2%;
 }
 
-.opDataGridContainer, .opDataGridContainerShow, .opDataGridContainerHide {
+.opDataGrid {
+  width: 100%
+}
+
+.opDataGrid, .opDataGridShow, .opDataGridHide {
   margin-top: 3.5%;
   grid-row-gap: 30%;
 }
 
-.opDataGridContainerShow {
-  animation-name: opDataGridContainerAnimationShow;
-  animation-duration: .2s;
-  animation-delay: .5s;
-  height: 50%;
+.opInfoContainerShow {
+  animation-name: opInfoContainerAnimationShow;
+  animation-duration: .30s;
+  height: 27.5%;
+  animation-fill-mode: forwards;  
 }
 
-.opDataGridContainerHide {
-  animation-name: opDataGridContainerAnimationHide;
-  animation-duration: .1s;
-  height: 0%;
-  visibility: hidden;
-}
-
-@keyframes opDataGridContainerAnimationShow {
+@keyframes opInfoContainerAnimationShow {
   0% {
     height: 0%;
+    top: 124%;
   }
   100% {
-    height: 50%;
+    height: 27.5%;
+    top: 110%;
   }
 }
 
-@keyframes opDataGridContainerAnimationHide {
+.opInfoContainerHide {
+  animation-name: opInfoContainerAnimationHide;
+  animation-delay: 1s;
+  animation-duration: .30s;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes opInfoContainerAnimationHide {
   0% {
-    height: 50%;
-    visibility: visible;
-  }
-  50% {
-    visibility: hidden;
+    height: 27.5%;
+    top: 110%;
   }
   100% {
     height: 0%;
-    visibility: hidden;
+    top: 124%;
   }
 }
 
-.dataGridContainer, .userCardDataGridContainer, .opDataGridContainer,
-.opDataGridContainerShow, .opDataGridContainerHide {
+.opDataGridShow, .opDataTitleShow {
+  animation-name: opDataAnimationShow;
+  animation-duration: 2s;
+  animation-delay: .2s;
+  opacity: 0%;
+  animation-fill-mode: forwards;  
+}
+
+.opDataGridHide, .opDataTitleHide {
+  animation-name: opDataAnimationHide;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;  
+}
+
+@keyframes opDataAnimationShow {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes opDataAnimationHide {
+  0% {
+    opacity: 100%;
+  }
+  100% {
+    opacity: 0%;
+    visibility: hidden;
+  }
+}
+.dataGridContainer, .userCardDataGridContainer, .opDataGrid,
+.opDataGridShow, .opDataGridHide {
   display: grid;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 50% 50%;
@@ -225,40 +260,6 @@
   z-index: 1;
   width: 110%;
   height: 27.5%;
-}
-
-.opInfoContainerShow {
-  animation-name: opInfoContainerAnimationShow;
-  animation-duration: .30s;
-  height: 27.5%;
-}
-
-.opInfoContainerHide {
-  animation-name: opInfoContainerAnimationHide;
-  animation-duration: .30s;
-  height: 0%;
-}
-
-@keyframes opInfoContainerAnimationShow {
-  0% {
-    height: 0%;
-    top: 124%;
-  }
-  100% {
-    height: 27.5%;
-    top: 110%;
-  }
-}
-
-@keyframes opInfoContainerAnimationHide {
-  0% {
-    height: 27.5%;
-    top: 110%;
-  }
-  100% {
-    height: 0%;
-    top: 124%;
-  }
 }
 
 @keyframes attackOpAnimation {

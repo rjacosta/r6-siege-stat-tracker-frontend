@@ -11,13 +11,12 @@ const FavOperator = ({operatorData}) => {
     "../../../public/images/operators/operatorPics"
   );
 
-  const [showOpInfo, setShowOpInfo] = useState(false);
+  const [showOpInfo, setShowOpInfo] = useState(true);
   const toggleOpInfo = () => {
     setShowOpInfo(!showOpInfo);
   };
   const operatorInfo = 
-  <div id={"opInfoContainer" + role}
-    className={showOpInfo ? "opInfoContainerShow" : "opInfoContainerHide"}>
+  <div id={"opInfoContainer" + role}>
       <Stats stats={operatorData} showOpInfo={showOpInfo} />
    </div>
 
