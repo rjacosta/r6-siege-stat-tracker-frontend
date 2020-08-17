@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Stats from "./Stats.js"
 const FavOperator = ({operatorData}) => {
     
@@ -11,13 +11,10 @@ const FavOperator = ({operatorData}) => {
     "../../../public/images/operators/operatorPics"
   );
 
-  const [showOpInfo, setShowOpInfo] = useState(true);
-  const toggleOpInfo = () => {
-    setShowOpInfo(!showOpInfo);
-  };
+
   const operatorInfo = 
   <div id={"opInfoContainer" + role}>
-      <Stats stats={operatorData} showOpInfo={showOpInfo} />
+      <Stats stats={operatorData} />
    </div>
 
   const nameLowerCase = name.toLowerCase();
@@ -27,7 +24,7 @@ const FavOperator = ({operatorData}) => {
     <div
       className="opTile"
       style={{
-        backgroundImage: `url(${opIcons(`./${nameLowerCase}.png`)})`,
+        backgroundImage: `url(${opIcons(`./${nameLowerCase}.png`)})`
       }}
     >
       <span className="caption">
@@ -40,7 +37,6 @@ const FavOperator = ({operatorData}) => {
         src={opPics(`./${nameLowerCase}.png`)}
         width="320"
         height="600"
-        onMouseDown={toggleOpInfo}
       />
       {operatorInfo}
     </div>

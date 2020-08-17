@@ -5,13 +5,26 @@ const Stats = ({stats}) => {
     const [showStats, setShowStats] = useState(true);
     const toggleShowStats = () => {
         setShowStats(!showStats);
-    };
+    }
+
+    const [containerClass, setContainerClass] = useState("opInfoContainerShow")
+
+    const toggleContainerClass = (toggleBorder) => {
+        if (!toggleBorder) {
+            setContainerClass(showStats ? 
+            "opInfoContainerHide" : "opInfoContainerShow");
+            toggleShowStats();
+        } else {
+            setContainerClass("opInfoContainerHideEnter")
+        }
+    }
 
     return (
-            <div className={stats.ctu === undefined ? "" : 
-            (showStats ? "opInfoContainerShow" : "opInfoContainerHide") }
-                onMouseDown={toggleShowStats}>
-                
+            <div className={stats.ctu === undefined ? "" : containerClass }
+                onMouseEnter={() => {toggleContainerClass(true)}}
+                onMouseExit={() => {toggleContainerClass(true)}}
+                onMouseDown={() => {toggleContainerClass(false)}}
+                >
                 {stats.ctu === undefined ? null : 
                     <div className={"caption " + (showStats ? "opDataTitleShow" : "opDataTitleHide")}>Operator Stats</div>}
                 <div className={stats.ctu === undefined ? "opDataGrid": 
