@@ -134,12 +134,14 @@
 
 .opInfoContainerHideEnter {
   border-style: solid;
-  border-width: 1;
+  border-width: 1px;
   border-color: white;
+  background: rgb(0, 0, 0, .5) !important;
 }
 
-.opInfoContainerHideExit {
+.opInfoContainerHideOut {
   border-style: none;
+  opacity: 0;
 }
 
 @keyframes opInfoContainerAnimationHide {
@@ -267,7 +269,7 @@
 }
 
 .opInfoContainer, .opInfoContainerShow, .opInfoContainerHide, 
-.opInfoContainerHideEnter, .opInfoContainerHideExit {
+.opInfoContainerHideEnter, .opInfoContainerHideOut {
   position: absolute;
   background: #333333;
   border-radius: 15px;
