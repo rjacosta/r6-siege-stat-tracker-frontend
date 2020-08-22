@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextBubble from "./components/TextBubble";
 import UserCard from "./components/UserCard/UserCard";
 import UserCardCompare from "./components/UserCardCompare";
+import OperatorList from "./components/OperatorList/OperatorList";
 import { Switch, Route, useHistory, Link } from "react-router-dom";
 
 const App = () => {
@@ -135,6 +136,7 @@ const App = () => {
           </Route>
           <Route path="/user">
             <UserCard userData={userData} />
+            <OperatorList operatorData={userData.operatorsUserData}/>
           </Route>
           <Route path="/compareUsers">
             <UserCardCompare
