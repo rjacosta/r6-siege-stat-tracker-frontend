@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Stats = ({stats}) => {
     
@@ -12,13 +12,9 @@ const Stats = ({stats}) => {
 
     const toggleContainerClass = (inContainer, toggleStats) => {
         if (toggleStats) {
-            if (showStats) setHideAnimationOccuring(true)
             setContainerClass(showStats ? 
             "opInfoContainerHide" : "opInfoContainerShow");
             toggleShowStats();
-            if (showStats) setTimeout(() => {
-                setHideAnimationOccuring(false)
-            }, 1300)
         } else if (!hideAnimationOccuring && !showStats) {
             if (inContainer) {
                 setContainerClass("opInfoContainerHideEnter");
@@ -27,6 +23,12 @@ const Stats = ({stats}) => {
             }     
         }
     }
+
+    useEffect(() => {
+        var element = document.getElementById("container");
+        element.addEventListener("animationstart", () => setHideAnimationOccuring(true), false);
+        element.addEventListener("animationend",  () => setHideAnimationOccuring(false), false);
+    })
 
     return (
             <div id="container" className={stats.ctu === undefined ? "" : containerClass }
