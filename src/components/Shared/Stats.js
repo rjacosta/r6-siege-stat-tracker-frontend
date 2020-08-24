@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const Stats = ({stats, forOpList}) => {
-    console.log(forOpList)
     const [showStats, setShowStats] = useState(true);
     const toggleShowStats = () => {
         setShowStats(!showStats);

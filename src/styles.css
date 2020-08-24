@@ -103,7 +103,6 @@
 }
 
 .opDataGrid, .opDataGridShow, .opDataGridHide {
-  margin-top: 3.5%;
   grid-row-gap: 30%;
 }
 
@@ -169,6 +168,9 @@
   }
 }
 
+.opDataTitleShow, .opDataTitleHide {
+  margin-bottom: 3.5%;
+}
 .opDataGridShow, .opDataTitleShow {
   animation-name: opDataAnimationShow;
   animation-duration: 2s;
@@ -421,35 +423,66 @@
 }
 
 /************* Operator List Styling *************/
-.opListItem {
+.opListItem, .opListItemShow, .opListItemHide{
+  color: white;
   background-color: #575050;
   margin: auto;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   width: 65vw;
-  height: 15vh;
+  height: 20vh;
   border-radius: 15px;
-  justify-content: center;
-  text-align: center;
   display: grid;
   grid-template-columns: 10% 15% 75%;
   grid-template-rows: 100%;
   position: relative;
+  overflow: hidden;
+  justify-content: left;
+  align-items: center;
 }
 
-.opTile {
+.opListItemShow {
+  visibility: visible;
+  animation: opListItemShowAnimation;
+  animation-duration: 2s;
+}
+
+@keyframes opListItemShowAnimation {
+  0% {
+    opacity: 0;
+    transform: translateX(-150%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.opListItemHide {
+  visibility: collapse;
+  animation: opListItemShowAnimation;
+  animation-duration: 2s;
+}
+
+@keyframes opListItemHideAnimation {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-150%);
+  }
+}
+
+.opIconImg {
   position: relative;
-  text-align: center;
-  margin-top: 5%;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100px 100px;
-  background-position: 50% 10%;
+  left: 100%;
+  transform: translate(-50%, 0);
 }
 
-.opTileImg {
-  position: absolute;
-  top: -25px;
-  clip: rect(0px,320px,225px,0px);
-
+.opImg {
+  position: relative;
+  left: 100%;
+  top: 90%;
+  transform: translate(-50%, 0);
 }
