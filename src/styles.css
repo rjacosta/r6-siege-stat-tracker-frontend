@@ -110,7 +110,6 @@
 .opInfoContainerShow {
   animation-name: opInfoContainerAnimationShow;
   animation-duration: .30s;
-  height: 27.5%;
   animation-fill-mode: forwards;
 }
 
@@ -164,6 +163,8 @@
   100% {
     height: 27.5%;
     top: 110%;
+    width: 110%;
+    left: -5%;
     opacity: 0;
   }
 }
@@ -210,7 +211,7 @@
 }
 
 @media (max-width: 1919px) {
-  .opTile {
+  .favOpTile {
     display: none;
   }
   .userCard {
@@ -261,7 +262,7 @@
   }
 }
 
-.opTile {
+.favOpTile {
   position: relative;
   text-align: center;
   margin-top: 5%;
@@ -270,11 +271,6 @@
   background-repeat: no-repeat;
   background-size: 320px 320px;
   background-position: 50% 10%;
-}
-
-.opTileTitle {
-  text-align: center;
-  width: 100%;
 }
 
 .opInfoContainer, .opInfoContainerShow, .opInfoContainerHide, 
@@ -422,4 +418,38 @@
   width: 75%;
   color: white;
   height: 50%;
+}
+
+/************* Operator List Styling *************/
+.opListItem {
+  background-color: #575050;
+  margin: auto;
+  margin-bottom: 15px;
+  width: 65vw;
+  height: 15vh;
+  border-radius: 15px;
+  justify-content: center;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 10% 15% 75%;
+  grid-template-rows: 100%;
+  position: relative;
+}
+
+.opTile {
+  position: relative;
+  text-align: center;
+  margin-top: 5%;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-position: 50% 10%;
+}
+
+.opTileImg {
+  position: absolute;
+  top: -25px;
+  clip: rect(0px,320px,225px,0px);
+
 }

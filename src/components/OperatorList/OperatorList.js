@@ -1,12 +1,18 @@
 import React from "react"
-
-const OperatorList = (operatorData) => {
+import Operator from "./Operator"
+const OperatorList = ({operatorsData}) => {
 
     const operatorList = [];
-    console.log(operatorData);
+    operatorsData.forEach((op) => {
+        if (op.name !== "Oryx" && op.name !== "Melusi" && op.name !== "Iana" && op.name !== "Ace")
+        operatorList.push(<Operator key={op.name} opData={op} />);
+    });
+    console.log(operatorList)
     return (
         <div>
-            
+            <ul>
+            {operatorList}
+            </ul>
         </div>
     )
 }

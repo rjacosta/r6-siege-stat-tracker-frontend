@@ -136,7 +136,7 @@ const App = () => {
           </Route>
           <Route path="/user">
             <UserCard userData={userData} />
-            <OperatorList operatorData={userData.operatorsUserData}/>
+            {userData.operatorsUserData !== undefined && <OperatorList operatorsData={userData.operatorsUserData.operatorsData}/>}
           </Route>
           <Route path="/compareUsers">
             <UserCardCompare

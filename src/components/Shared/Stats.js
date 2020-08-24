@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const Stats = ({stats}) => {
-    
+const Stats = ({stats, forOpList}) => {
+    console.log(forOpList)
     const [showStats, setShowStats] = useState(true);
     const toggleShowStats = () => {
         setShowStats(!showStats);
@@ -25,20 +25,20 @@ const Stats = ({stats}) => {
     }
 
     useEffect(() => {
-        var element = document.getElementById("container");
-        element.addEventListener("animationstart", () => setHideAnimationOccuring(true), false);
-        element.addEventListener("animationend",  () => setHideAnimationOccuring(false), false);
+        var container = document.getElementById("container");
+        container.addEventListener("animationstart", () => setHideAnimationOccuring(true), false);
+        container.addEventListener("animationend",  () => setHideAnimationOccuring(false), false);
     })
 
     return (
-            <div id="container" className={stats.ctu === undefined ? "" : containerClass }
+            <div id="container" className={(stats.ctu === undefined || forOpList) ? "" : containerClass }
                 onMouseEnter={() => {toggleContainerClass(true, false)}}
                 onMouseOut={() => {toggleContainerClass(false, false)}}
                 onMouseDown={() => {toggleContainerClass(false, true)}}
                 >
-                {stats.ctu === undefined ? null : 
+                {(stats.ctu === undefined || forOpList) ? null : 
                     <div className={"caption " + (showStats ? "opDataTitleShow" : "opDataTitleHide")}>Operator Stats</div>}
-                <div className={stats.ctu === undefined ? "opDataGrid": 
+                <div id="dataGrid" className={(stats.ctu === undefined || forOpList) ? "opDataGrid": 
                     (showStats ? "opDataGridShow" : "opDataGridHide")}>
                     <div className="caption">W/L: {stats.wl}</div>
                     <div className="caption">Wins: {stats.wins}</div>

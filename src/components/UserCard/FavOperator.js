@@ -1,5 +1,5 @@
 import React from "react";
-import Stats from "./Stats.js"
+import Stats from "../Shared/Stats.js"
 const FavOperator = ({operatorData}) => {
     
   const {name, role} = operatorData;
@@ -14,7 +14,7 @@ const FavOperator = ({operatorData}) => {
 
   const operatorInfo = 
   <div id={"opInfoContainer" + role}>
-      <Stats stats={operatorData} />
+      <Stats stats={operatorData} forOpList={false} />
    </div>
 
   const nameLowerCase = name.toLowerCase();
@@ -22,7 +22,7 @@ const FavOperator = ({operatorData}) => {
 
   return (
     <div
-      className="opTile"
+      className="favOpTile"
       style={{
         backgroundImage: `url(${opIcons(`./${nameLowerCase}.png`)})`
       }}
