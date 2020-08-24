@@ -5,8 +5,9 @@ const OperatorList = ({operatorsData}) => {
     const operatorList = [];
 
     const popTopOpListItem = () => {
-        console.log("here");
+        if (onScreenOpList.length === 1) return;
         setOnScreenOpList(oldList => {
+            console.log(oldList.slice(1));
             return oldList.slice(1);
         });
     }

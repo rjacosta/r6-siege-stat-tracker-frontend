@@ -16,13 +16,17 @@ const Operator = ({opData, popTopOpListItem}) => {
     const nameLowerCase = name.toLowerCase();
     const [opListItemClassName, setOpListItemClassName] = useState("opListItemShow")
 
+    const [onScreen, setOnScreen] = useState(true);
+
     useEffect(() => {
         var observer = new IntersectionObserver(function(entries) {
             // isIntersecting is true when element and viewport are overlapping
             // isIntersecting is false when element and viewport don't overlap
-            if(entries[0].isIntersecting === false)
-                console.log('Element off screen ' + opData.name);
-        }, { threshold: [1] });
+            if (entries[0].isIntersecting === true) {
+                console.log("pop" + opData.name);
+                popTopOpListItem();    
+            }
+        }, { threshold: [.1]});
         
         observer.observe(document.getElementById("opListItem"));
     }, [])
