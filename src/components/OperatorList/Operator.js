@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Stats from "../Shared/Stats.js"
 
-const Operator = ({opData}) => {
+const Operator = ({opData, remove}) => {
 
     const {name} = opData;
 
@@ -14,6 +14,18 @@ const Operator = ({opData}) => {
     );
 
     const nameLowerCase = name.toLowerCase();
+
+    useEffect(() => {
+        document.addEventListener('scroll', () =>
+        {
+            var documentElement = document.documentElement;
+            const opElement = document.getElementById(opData.name);
+            if (opElement.getBoundingClientRect().y <= 0)
+                remove(opData.name);
+
+        });
+        
+    }, []);
 
     return ( 
         <div id={opData.name} className="opListItemShow">
