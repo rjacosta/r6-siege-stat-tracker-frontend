@@ -458,7 +458,7 @@
 }
 
 .opListItemHide {
-  visibility: collapse;
+  display: none;
   animation: opListItemShowAnimation;
   animation-duration: 2s;
 }

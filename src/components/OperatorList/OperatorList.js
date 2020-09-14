@@ -1,34 +1,50 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import Operator from "./Operator"
 const OperatorList = ({operatorsData}) => {
 
     const operatorList = [];
 
-    
-    var remove = (opName) => {
-        console.log(onScreenOpList)
-        var opIndexRemove = onScreenOpList.findIndex(op => op.name === opName);
-        console.log(opIndexRemove);
-        onScreenOpList.splice(opIndexRemove, 1);
+    var remove = (opName, topOrBottom) => {
+        console.log(opName + " " + topOrBottom)
     }
 
+    var index = 0;
     operatorsData.forEach((op) => {
-        if (op.name !== "Oryx" && op.name !== "Melusi" && op.name !== "Iana" && op.name !== "Ace" && op.name !== "Ace" && op.name !== "Zero")
-        operatorList.push(<Operator key={op.name} opData={op} remove={remove} />);
+        if (op.name !== "Oryx" && op.name !== "Melusi" && op.name !== "Iana" && op.name !== "Ace" && op.name !== "Zero") {
+            operatorList.push(<Operator key={op.name} opData={op} remove={remove} hide={index !== 0} />);
+            index++;
+        }
     });
-    
-    const [onScreenOpList, setOnScreenOpList] = useState(operatorList.splice(0, 1));
+
+    const [opList, setOpList] = useState(operatorList);
+    const [opBottomIndex, setOpBottomIndex] = useState(0);
 
     useEffect(() => {
         remove = remove.bind(this);
         document.addEventListener('scroll', () =>
         {
             var documentElement = document.documentElement;
+            // figure out how to add to top when scroll up
             if (documentElement.scrollHeight - documentElement.scrollTop === documentElement.clientHeight)
             {
-                setOnScreenOpList(oldList => {
-                    return [...oldList,  operatorList.splice(0, 1)[0]]
+                setOpBottomIndex(opBottomIndex + 1);
+                setOpList(prevOpList => {
+                    console.log(opBottomIndex)
+                    var prevOpProps = operatorList[opBottomIndex].props;
+                    prevOpList.splice(opBottomIndex, 1);
+                    return [...prevOpList, <Operator key={prevOpProps.opData.name} opData={prevOpProps.opData} remove={remove} hide={false} />]
+                    var newOpList = [];
+                    /*prevOpList.forEach((op) => {
+                        
+                        if (index === opBottomIndex) {
+                            newOpList.push(<Operator key={prevOpProps.opData.name} opData={prevOpProps.opData} remove={remove} hide={false} />);
+                        } else {
+                            newOpList.push(op);
+                        }
+                    })
+                    return newOpList;*/
                 });
+                console.log(opList)
             }
         });
     });
@@ -36,7 +52,7 @@ const OperatorList = ({operatorsData}) => {
     return (
         <div id="operatorList" >
             <li>
-                {onScreenOpList}
+                {opList}
             </li>
         </div>
     )
