@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Stats from "../Shared/Stats.js"
 
 const Operator = ({opData, remove, hide}) => {
@@ -14,29 +14,9 @@ const Operator = ({opData, remove, hide}) => {
     );
 
     const nameLowerCase = name.toLowerCase();
-    const [isHidden, setIsHidden] = useState(hide);
-
-    var testFunc = () => {};
-    useEffect(() => {
-        testFunc = testFunc.bind(this);
-        document.addEventListener('scroll', () =>
-        {
-            if (hide) return;
-            var documentElement = document.documentElement;
-            const opElement = document.getElementById(opData.name);
-            if (opElement.getBoundingClientRect().y <= 0)
-                remove(opData.name, 'top')
-                    
-            if (opElement.getBoundingClientRect().y >= documentElement.clientHeight) {
-                remove(opData.name, 'bottom')
-            }
-
-        })
-        
-    });
 
     return ( 
-        <div id={opData.name} className={isHidden ? "opListItemHide" : "opListItemShow"}>
+        <div id={opData.name} className={"opListItemShow"}>
             <img 
                 className="opIconImg"
                 alt="operatorIcon"
