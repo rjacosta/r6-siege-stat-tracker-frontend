@@ -5,7 +5,7 @@ const OperatorList = ({operatorsData}) => {
     const operatorList = [];
 
     operatorsData.forEach((op) => {
-        if (op.name !== "Oryx" && op.name !== "Melusi" && op.name !== "Iana" && op.name !== "Ace" && op.name !== "Ace")
+        if (op.name !== "Oryx" && op.name !== "Melusi" && op.name !== "Iana" && op.name !== "Ace" && op.name !== "Zero")
         operatorList.push(<Operator key={op.name} opData={op} />);
     });
     
